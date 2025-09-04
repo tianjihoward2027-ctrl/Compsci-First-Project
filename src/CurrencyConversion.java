@@ -4,7 +4,7 @@ import java.util.ArrayList; // Import the ArrayList class
 public class CurrencyConversion {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
-        
+
         System.out.println("Enter an amount in $:");
         double dollarValue = input.nextDouble();
         double dollarValueTrunc = Math.floor(dollarValue * 100) / 100; 

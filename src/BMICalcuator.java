@@ -6,7 +6,7 @@ public class BMICalcuator {
         Scanner input = new Scanner(System.in);
         DecimalFormat oneDecimal = new DecimalFormat("#.0");
 
-        System.out.println("Enter height:");
+        System.out.println("Enter height (cm):");
         String heightInput = input.nextLine();
 
         double height;
@@ -15,13 +15,13 @@ public class BMICalcuator {
                 height = Double.parseDouble(heightInput);
                 break;
             } catch (Exception e)  {
-                System.out.println("Invalid response. Enter height:");
+                System.out.println("Invalid response. Enter height (cm):");
                 input = new Scanner(System.in);
                 heightInput = input.nextLine();
             }
         }
 
-        System.out.println("Enter weight:");
+        System.out.println("Enter weight (kg):");
         input = new Scanner(System.in);
         String weightInput = input.nextLine();
 
@@ -31,12 +31,12 @@ public class BMICalcuator {
                 weight = Double.parseDouble(weightInput);
                 break;
             } catch (Exception e)  {
-                System.out.println("Invalid response. Enter weight:");
+                System.out.println("Invalid response. Enter weight (kg):");
                 input = new Scanner(System.in);
                 weightInput = input.nextLine();
             }
         }
-        double bmi = weight + height;
+        double bmi = 703 * weight / ( height * height) ;
         System.out.println("BMI is " + oneDecimal.format(bmi) + " kg/m^2");
     }
 }
