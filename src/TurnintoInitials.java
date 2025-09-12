@@ -10,12 +10,12 @@ public class TurnintoInitials {
             System.out.println("Enter Full Name: ");
             fullName = input.nextLine();
             if (fullName.charAt(0) !=  ' ') {
+                //System.out.println(fullName.charAt(0)); DEBUG
                 firstLetter.add(fullName.charAt(0));
-                System.out.println(fullName.charAt(0));
             }
             for (int i = 1; i < fullName.length(); i++) {
                 if (fullName.charAt(i-1) == ' ') {
-                    System.out.println(fullName.charAt(i));
+                    // System.out.println(fullName.charAt(i)); DEBUG
                     firstLetter.add(fullName.charAt(i));
                 }
             }

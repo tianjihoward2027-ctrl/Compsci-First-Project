@@ -7,8 +7,8 @@ public class CurrencyConversion {
 
         System.out.println("Enter an amount in $:");
         double dollarValue = input.nextDouble();
-        double dollarValueTrunc = Math.floor(dollarValue * 100) / 100; 
-
+        double dollarValueTrunc = Math.floor(dollarValue * 100) / 100;
+    
         System.out.println("Choose currency to convert (Euro, Yen, BitCoin)");
         input = new Scanner(System.in);
         String currency = input.nextLine();
