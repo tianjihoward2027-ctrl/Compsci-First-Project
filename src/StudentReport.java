@@ -3,6 +3,16 @@ import java.util.*;
 public class StudentReport {
     String studentName;
     public int grade;
+    static String[] availableCommands = {
+        "add grade",
+        "get grade",
+        "get average grade",
+        "get highest grade",
+        "get lowest grade",
+        "get passing students",
+        "get failing students",
+        "get total students",
+    };
 
     public StudentReport(String name) {
         studentName = name;
@@ -19,10 +29,6 @@ public class StudentReport {
         
     }
 
-    public int getGrade() {
-        return grade; 
-    }    
-
     public boolean passing(int boundary) {
         if (grade >= boundary) {
             return true;
@@ -31,25 +37,19 @@ public class StudentReport {
         }
     }
 
-    public static void main(String[] args) {
-        ArrayList<StudentReport> studentList = new ArrayList<>();
-        String[] availableCommands = {
-            "add grade",
-            "get grade",
-            "get average grade",
-            "get highest grade",
-            "get lowest grade",
-            "get passing students",
-            "get failing students",
-            "get total students",
-        };
+    public static void printAvailableCommands() {
         System.out.println("Student Report Database:");
         for (int i = 0; i < availableCommands.length; i++) {
             int index = i+1;
             System.out.println( index + ". " + availableCommands[i] );
         }
+    }
+
+    public static void main(String[] args) {
+        boolean fail = false;
+        ArrayList<StudentReport> studentList = new ArrayList<>();
+        printAvailableCommands();
         while (true) {
-            Boolean fail = false;
             Scanner input = new Scanner(System.in);
             String commandEntered = input.nextLine().toLowerCase();
             if (commandEntered.equals(availableCommands[0]) || commandEntered.equals("1")) {
@@ -168,10 +168,7 @@ public class StudentReport {
                 fail = true;
             }
             if (fail == false) {
-                for (int i = 0; i < availableCommands.length; i++) {
-                    int index = i+1;
-                    System.out.println( index + ". " + availableCommands[i] );
-                }
+                printAvailableCommands();
             }
         }
     }
