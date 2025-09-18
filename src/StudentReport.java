@@ -32,10 +32,6 @@ public class StudentReport {
     }
 
     public static void main(String[] args) {
-        int inputGrade;
-        double outputGrade;
-        int studentNumber;
-        Boolean fail = false;
         ArrayList<StudentReport> studentList = new ArrayList<>();
         String[] availableCommands = {
             "add grade",
@@ -53,16 +49,18 @@ public class StudentReport {
             System.out.println( index + ". " + availableCommands[i] );
         }
         while (true) {
+            Boolean fail = false;
             Scanner input = new Scanner(System.in);
             String commandEntered = input.nextLine().toLowerCase();
             if (commandEntered.equals(availableCommands[0]) || commandEntered.equals("1")) {
                 System.out.println("Enter student name: ");
-                input = new Scannadder(System.in);
-                student = new StudentReport(input.nextLine());
+                input = new Scanner(System.in);
+                StudentReport student = new StudentReport(input.nextLine());
                 if (!studentList.contains(student)) {
                     studentList.add(student);
                 }
                 System.out.println("Enter grade: ");
+                int inputGrade;
                 while (true) {
                     try {
                         inputGrade = input.nextInt();
@@ -90,7 +88,7 @@ public class StudentReport {
                     }
                 }
             } else if (commandEntered.equals(availableCommands[2]) || commandEntered.equals("3")) {
-                outputGrade = 0;
+                int outputGrade = 0;
                 for (StudentReport obj: studentList) {    
                     outputGrade += obj.grade;
                     outputGrade = outputGrade / studentList.size();
@@ -98,37 +96,37 @@ public class StudentReport {
                 }
                 System.out.println("Average grade is " + outputGrade);
             } else if (commandEntered.equals(availableCommands[3]) || commandEntered.equals("4")) {
-                outputGrade = 0;
-                student = null;
+                int outputGrade = 0;
+                StudentReport studentHighest = null;
                 for (StudentReport obj: studentList) {
                     if (outputGrade < obj.grade) {
                         outputGrade = obj.grade;
-                        student = obj;
+                        studentHighest = obj;
                     }
                 }
-                if (student == null) {
+                if (studentHighest == null) {
                     System.out.println("List has not been initialized.");
                 } else {
-                    System.out.println("Highest grade is " + outputGrade + " from " + student.studentName);
+                    System.out.println("Highest grade is " + outputGrade + " from " + studentHighest.studentName);
                 }
             } else if (commandEntered.equals(availableCommands[4]) || commandEntered.equals("5")) {
-                outputGrade = 100;
-                student = null;
+                int outputGrade = 100;
+                StudentReport studentLowest = null;
                 for (StudentReport obj: studentList) {
                     if (outputGrade > obj.grade) {
                         outputGrade = obj.grade;
-                        student = obj;
+                        studentLowest = obj;
                     }
                 }
-                if (student == null) {
+                if (studentLowest == null) {
                     System.out.println("List has not been initialized.");
                 } else {
-                    System.out.println("Lowest grade is " + outputGrade);
+                    System.out.println("Lowest grade is " + outputGrade + " from " + studentLowest.studentName);
                 }
-                System.out.println("Lowest grade is " + outputGrade);
             } else if (commandEntered.equals(availableCommands[5]) || commandEntered.equals("6")) {
-                studentNumber = 0;
+                int studentNumber = 0;
                 System.out.println("Enter passing threshold: ");
+                int inputGrade;
                 while (true) {
                     try {
                         inputGrade = input.nextInt();
@@ -145,8 +143,9 @@ public class StudentReport {
                 }
                 System.out.println("The number of students that passed is " + studentNumber);
             } else if (commandEntered.equals(availableCommands[6]) || commandEntered.equals("7")) {
-                studentNumber = 0;
+                int studentNumber = 0;
                 System.out.println("Enter passing threshold: ");
+                int inputGrade;
                 while (true) {
                     try {
                         inputGrade = input.nextInt();
