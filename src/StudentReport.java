@@ -78,12 +78,13 @@ public class StudentReport {
             } else if (commandEntered.equals(availableCommands[1]) || commandEntered.equals("2")) {
                 System.out.println("Enter student name: ");
                 input = new Scanner(System.in);
-                StudentReport student = new StudentReport(input.nextLine());
+                String studentToSearch = input.nextLine().toLowerCase();
                 for (StudentReport obj: studentList) {
-                    if (obj.studentName.equals(student.studentName)) {
+                    StudentReport lastStudent = studentList.get((studentList.size() - 1));
+                    if (obj.studentName.toLowerCase().equals(studentToSearch)) {
                         System.out.println("Student has a grade of " + obj.grade);
                         break;
-                    } else if (studentList.get((studentList.size() - 1)).equals(obj)) {
+                    } else if (lastStudent.equals(obj)) {
                         System.out.println("Student is not found.");
                     }
                 }
@@ -92,7 +93,6 @@ public class StudentReport {
                 for (StudentReport obj: studentList) {    
                     outputGrade += obj.grade;
                     outputGrade = outputGrade / studentList.size();
-                    
                 }
                 System.out.println("Average grade is " + outputGrade);
             } else if (commandEntered.equals(availableCommands[3]) || commandEntered.equals("4")) {
