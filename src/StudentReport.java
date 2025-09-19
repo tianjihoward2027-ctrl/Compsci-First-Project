@@ -75,81 +75,68 @@ public class StudentReport {
             input = new Scanner(System.in);
             String commandEntered = input.nextLine().toLowerCase();
             refreshLastStudentVar();
-            for (int i = 0; i < availableCommands.length; i++) {
-                int humanIndex = i+1;
+            checker: for (int i = 0; i < availableCommands.length; i++) {
+                int onebasedIndex = i+1;
                 int inputGrade;
-                if (commandEntered.equals(availableCommands[i]) || commandEntered.equals(Integer.toString(humanIndex))) {
-                    switch (i) {
-                        case 0:
+                if (commandEntered.equals(availableCommands[0]) || commandEntered.equals(Integer.toString(1))) {
+                    System.out.println("Enter student name: ");
+                    input = new Scanner(System.in);
+                    String nameInput = input.nextLine();
+                    StudentReport student = new StudentReport(nameInput);
+                    for (StudentReport obj: studentList) {
+                        if (obj.studentName.equals(nameInput)) {
+                            System.out.println("Student has already been added.");
+                            printAvailableCommands();
+                            break checker;
+                        }
+                    }
+                    studentList.add(student); 
+                    System.out.println("Enter grade: ");
+                    inputGrade = inputGrade();
+                    refreshLastStudentVar();
+                    lastStudent.addGrade(inputGrade);
+                    break;
+                } else if (commandEntered.equals(availableCommands[i]) || commandEntered.equals(Integer.toString(onebasedIndex))) {
+                    if (!(studentList.size() > 0) || i != 0) {
+                        System.out.println("List has not been initialized.");   
+                        break;
+                    }
+                    switcher: switch (i) {
+                        case 1: 
                             System.out.println("Enter student name: ");
+                            for (StudentReport obj: studentList) {
+                                if (obj.equals(lastStudent)) {
+                                    System.out.println("Student is not found.");
+                                    break switcher;
+                                }
+                            }
                             input = new Scanner(System.in);
                             String nameInput = input.nextLine();
-                            StudentReport student = new StudentReport(nameInput);
-                            boolean alreadyAddedCondition = false;
-                            if (studentList.size() > 0) {
-                                for (StudentReport obj: studentList) {
-                                    if (obj.studentName.equals(nameInput)) {
-                                        System.out.println("Student has already been added.");
-                                        alreadyAddedCondition = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (alreadyAddedCondition == false) {
-                                studentList.add(student); 
-                                System.out.println("Enter grade: ");
-                                inputGrade = inputGrade();
-                                refreshLastStudentVar();
-                                lastStudent.addGrade(inputGrade);
-                            }
-                            break;
-                        case 1:
-                            student = null;
-                            System.out.println("Enter student name: ");
-                            input = new Scanner(System.in);
-                            nameInput = input.nextLine();
-                            boolean studentFound = false;
-                            if (studentList.size() > 0) {
-                                for (StudentReport obj: studentList) {
-                                    if (obj.studentName.equals(nameInput)) {
-                                        student = obj;
-                                        studentFound = true;
-                                        break;
-                                    } else if (obj.equals(lastStudent)) {
-                                        System.out.println("Student is not found.");
-                                    }
-                                }
-                            } else {
-                                System.out.println("List has not been initialized.");                             
-                            }
-                            if (studentFound == true) {
-                                System.out.println("Enter grade: ");
-                                inputGrade = inputGrade();
-                                if (studentList.size() > 0) {
-                                    for (StudentReport obj: studentList) {
-                                        if (obj.equals(student)) {
-                                            obj.addGrade(inputGrade);
-                                        }
-                                    }
+                            refreshLastStudentVar();
+                            System.out.println("Enter grade: ");
+                            inputGrade = inputGrade();
+                            for (StudentReport obj: studentList) {
+                                if (obj.studentName.equals(nameInput)) {
+                                   obj.addGrade(inputGrade);
                                 }
                             }
                             break;
                         case 2:
+                        if (!(studentList.size() > 0)) {
+                                System.out.println("List has not been initialized.");   
+                                break;
+                            } 
                             System.out.println("Enter student name: ");
                             input = new Scanner(System.in);
                             nameInput = input.nextLine().toLowerCase();
-                            if (studentList.size() > 0) {
-                                refreshLastStudentVar();
-                                for (StudentReport obj: studentList) {
-                                    if (obj.studentName.toLowerCase().equals(nameInput)) {
-                                        System.out.println(obj.studentName + " has a grade of " + obj.grade);
-                                        break;
-                                    } else if (obj.equals(lastStudent)) {
-                                        System.out.println("Student is not found.");
-                                    }
+                            refreshLastStudentVar();
+                            for (StudentReport obj: studentList) {
+                                if (obj.studentName.toLowerCase().equals(nameInput)) {
+                                    System.out.println(obj.studentName + " has a grade of " + obj.grade);
+                                    break;
+                                } else if (obj.equals(lastStudent)) {
+                                    System.out.println("Student is not found.");
                                 }
-                            } else {
-                                System.out.println("List has not been initialized.");
                             }
                             break;
                         case 3:
@@ -216,7 +203,7 @@ public class StudentReport {
                     }
                     printAvailableCommands();
                     break;
-                } else if (humanIndex == availableCommands.length) {
+                } else if (onebasedIndex == availableCommands.length) {
                     System.out.println("Not found. Try again:");
                 }
             }
